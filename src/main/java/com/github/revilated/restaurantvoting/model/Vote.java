@@ -16,7 +16,7 @@ import java.util.*;
 @Entity
 @Table(name = "vote", uniqueConstraints = {@UniqueConstraint(columnNames = {"created", "user_id", "restaurant_id"}, name = "vote_unique_created_user_restaurant_idx")})
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Setter
+@Setter(AccessLevel.PROTECTED)
 @Getter
 public class Vote extends BaseEntity {
 

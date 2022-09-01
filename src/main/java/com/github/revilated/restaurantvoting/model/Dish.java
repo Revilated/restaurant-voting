@@ -9,7 +9,7 @@ import org.hibernate.validator.constraints.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.util.*;
+import java.time.*;
 
 /**
  * @author revilated
@@ -32,11 +32,9 @@ public class Dish extends NamedEntity {
     @Column(name = "created", nullable = false, columnDefinition = "date default now()", updatable = false)
     @NotNull
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @Temporal(TemporalType.DATE)
-    private Date createdDate = new Date();
+    private LocalDate createdDate = LocalDate.now();
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "restaurant_id", nullable = false)
+    @Column(name = "restaurant_id", nullable = false, updatable = false)
     @JsonIgnore
-    private Restaurant restaurant;
+    private int restaurantId;
 }

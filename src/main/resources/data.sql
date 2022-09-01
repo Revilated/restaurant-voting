@@ -14,6 +14,11 @@ VALUES ('Макдональдс'),
        ('Бургер Кинг'),
        ('KFC');
 
+INSERT INTO DISH (NAME, PRICE, RESTAURANT_ID, CREATED)
+VALUES ('Двойной чизбургер', 15000, 1, '2022-08-31'),
+       ('Нагетсы', 13000, 1, '2022-08-31'),
+       ('Чай', 4000, 1, '2022-08-31');
+
 INSERT INTO DISH (NAME, PRICE, RESTAURANT_ID)
 VALUES ('Бит тейсти', 20000, 1),
        ('Картофель фри', 5000, 1),
