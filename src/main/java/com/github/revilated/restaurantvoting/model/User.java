@@ -60,6 +60,7 @@ public class User extends NamedEntity implements HasIdAndEmail, Serializable {
     @JoinColumn(name = "user_id")
     @OnDelete(action = OnDeleteAction.CASCADE) //https://stackoverflow.com/a/44988100/548473
     @Schema(hidden = true)
+    @JsonIgnore
     private List<Vote> votes;
 
     public User(User u) {
