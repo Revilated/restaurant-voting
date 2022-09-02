@@ -15,11 +15,13 @@ import java.time.*;
  * @author revilated
  */
 @Entity
-@Table(name = "dish",
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = {"created", "restaurant_id", "name"},
-                name = "dish_unique_created_restaurant_name_idx")
-        })
+@Table(
+        name = "dish",
+        uniqueConstraints = {@UniqueConstraint(
+                columnNames = {"restaurant_id", "name", "created"},
+                name = "dish_unique_restaurant_name_created_idx")
+        }
+)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Setter

@@ -16,15 +16,18 @@ import java.util.*;
  * @author revilated
  */
 @Entity
-@Table(name = "restaurant", uniqueConstraints = {@UniqueConstraint(columnNames = {"name"}, name = "restaurant_unique_name_idx")})
+@Table(
+        name = "restaurant",
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"name"}, name = "restaurant_unique_name_idx")}
+)
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Restaurant extends NamedEntity {
 
     @OneToMany(fetch = FetchType.LAZY)//, cascade = CascadeType.REMOVE, orphanRemoval = true)
-    //@JoinTable(name = "vote", joinColumns = @JoinColumn(name = "restaurant_id"), inverseJoinColumns = @JoinColumn(name = "id"))
     @JoinColumn(name = "restaurant_id", updatable = false)
+    @Where(clause = "created_date = current_date()")
     @OnDelete(action = OnDeleteAction.CASCADE) //https://stackoverflow.com/a/44988100/548473
     @Schema(hidden = true)
     private List<Vote> votes;

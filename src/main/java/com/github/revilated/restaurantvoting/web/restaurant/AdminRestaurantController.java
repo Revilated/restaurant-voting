@@ -17,11 +17,11 @@ import java.util.*;
 import static com.github.revilated.restaurantvoting.util.validation.ValidationUtil.*;
 
 @RestController
-@RequestMapping(value = RestaurantController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = AdminRestaurantController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 @Slf4j
 @AllArgsConstructor
 @CacheConfig(cacheNames = "restaurants")
-public class RestaurantController {
+public class AdminRestaurantController {
 
     static final String REST_URL = "/api/admin/restaurants";
 
@@ -36,7 +36,7 @@ public class RestaurantController {
     @GetMapping("/{id}/with-menu")
     public ResponseEntity<Restaurant> getWithMenu(@PathVariable int id) {
         log.info("getWithMenu {}", id);
-        return ResponseEntity.of(repository.getWithMenu(id));
+        return ResponseEntity.of(repository.findWithMenu(id));
     }
 
     @DeleteMapping("/{id}")

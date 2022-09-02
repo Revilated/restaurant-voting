@@ -30,6 +30,10 @@ VALUES ('Бит тейсти', 20000, 1),
        ('Картофель по-деревенски', 7000, 3),
        ('Спрайт', 6000, 3);
 
+INSERT INTO VOTE (USER_ID, RESTAURANT_ID, CREATED)
+VALUES (1, 1, '2022-08-31'),
+       (2, 2, '2022-08-31');
+
 INSERT INTO VOTE (USER_ID, RESTAURANT_ID)
 VALUES (1, 1),
        (2, 1),

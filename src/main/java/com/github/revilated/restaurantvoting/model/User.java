@@ -3,7 +3,6 @@ package com.github.revilated.restaurantvoting.model;
 import com.fasterxml.jackson.annotation.*;
 import com.github.revilated.restaurantvoting.*;
 import com.github.revilated.restaurantvoting.util.validation.*;
-import io.swagger.v3.oas.annotations.media.*;
 import lombok.*;
 import org.hibernate.annotations.*;
 import org.springframework.util.*;
@@ -55,13 +54,6 @@ public class User extends NamedEntity implements HasIdAndEmail, Serializable {
     @JoinColumn(name = "user_id") //https://stackoverflow.com/a/62848296/548473
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Role> roles;
-
-    @OneToMany(fetch = FetchType.LAZY)//, cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @JoinColumn(name = "user_id")
-    @OnDelete(action = OnDeleteAction.CASCADE) //https://stackoverflow.com/a/44988100/548473
-    @Schema(hidden = true)
-    @JsonIgnore
-    private List<Vote> votes;
 
     public User(User u) {
         this(u.id, u.name, u.email, u.password, u.enabled, u.registered, u.roles);
