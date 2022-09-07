@@ -39,4 +39,11 @@ public class Dish extends NamedEntity {
     @Column(name = "restaurant_id", nullable = false, updatable = false)
     @JsonIgnore
     private int restaurantId;
+
+    public Dish(Integer id, String name, Long price, LocalDate createdDate, int restaurantId) {
+        super(id, name);
+        this.price = price;
+        this.createdDate = createdDate;
+        this.restaurantId = restaurantId;
+    }
 }
