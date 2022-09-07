@@ -2,6 +2,7 @@ package com.github.revilated.restaurantvoting.web.restaurant;
 
 import com.github.revilated.restaurantvoting.repository.*;
 import com.github.revilated.restaurantvoting.to.*;
+import com.github.revilated.restaurantvoting.util.*;
 import lombok.*;
 import lombok.extern.slf4j.*;
 import org.springframework.cache.annotation.*;
@@ -25,8 +26,6 @@ public class ProfileRestaurantController {
     @Cacheable
     public List<RestaurantTo> getAllWithVotes() {
         log.info("getAllWithVotes");
-        return repository.findAllWithDailyVotes().stream()
-                .map(r -> new RestaurantTo(r.getId(), r.getName(), r.getVotes().size()))
-                .toList();
+        return RestaurantUtil.toTos(repository.findAllWithDailyVotes());
     }
 }

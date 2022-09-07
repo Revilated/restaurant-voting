@@ -4,6 +4,7 @@ import com.github.revilated.restaurantvoting.model.*;
 import com.github.revilated.restaurantvoting.to.*;
 import com.github.revilated.restaurantvoting.web.*;
 import com.github.revilated.restaurantvoting.web.menu.*;
+import com.github.revilated.restaurantvoting.web.vote.*;
 
 import java.util.*;
 
@@ -29,6 +30,9 @@ public class RestaurantTestData {
 
     static {
         restaurant1.setMenu(MenuTestData.restaurant1DailyMenu);
+        restaurant1.setVotes(VoteTestData.restaurant1DailyVotes);
+        restaurant2.setVotes(VoteTestData.restaurant2DailyVotes);
+        restaurant3.setVotes(VoteTestData.restaurant3DailyVotes);
     }
 
     public static Restaurant getNew() {
