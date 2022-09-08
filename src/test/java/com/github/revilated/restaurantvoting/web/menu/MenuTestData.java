@@ -7,15 +7,20 @@ import java.time.*;
 import java.util.*;
 
 public class MenuTestData {
-    public static final MatcherFactory.Matcher<Dish> MENU_MATCHER = MatcherFactory.usingIgnoringFieldsComparator(Dish.class);
+    public static final MatcherFactory.Matcher<Dish> DISH_MATCHER = MatcherFactory
+            .usingIgnoringFieldsComparator(Dish.class, "restaurantId", "createdDate");
 
     public static final int DISH1_ID = 1;
+    public static final int NOT_FOUND = 100;
+    public static final int TODAY_RESTAURANT1_DISH1_ID = DISH1_ID + 3;
     public static final Dish dish1 = new Dish(DISH1_ID, "Двойной чизбургер", 15000L, LocalDate.parse("2022-08-31"), 1);
     public static final Dish dish2 = new Dish(DISH1_ID + 1, "Нагетсы", 13000L, LocalDate.parse("2022-08-31"), 1);
     public static final Dish dish3 = new Dish(DISH1_ID + 2, "Чай", 4000L, LocalDate.parse("2022-08-31"), 1);
     public static final Dish dish4 = new Dish(DISH1_ID + 3, "Биг тейсти", 20000L, LocalDate.now(), 1);
     public static final Dish dish5 = new Dish(DISH1_ID + 4, "Картофель фри", 5000L, LocalDate.now(), 1);
     public static final Dish dish6 = new Dish(DISH1_ID + 5, "Кола", 6000L, LocalDate.now(), 1);
+    public static final Dish todayRestaurant1Dish1 = dish4;
+    public static final Dish todayRestaurant1Dish2 = dish5;
 
     public static final List<Dish> restaurant1DailyMenu = List.of(dish4, dish5, dish6);
 

@@ -46,4 +46,10 @@ public class Dish extends NamedEntity {
         this.createdDate = createdDate;
         this.restaurantId = restaurantId;
     }
+
+    public Dish(Integer id, String name, Long price, int restaurantId) {
+        super(id, name);
+        this.price = price;
+        this.restaurantId = restaurantId;
+    }
 }
