@@ -1,11 +1,9 @@
 package com.github.revilated.restaurantvoting.model;
 
 import com.fasterxml.jackson.annotation.*;
-import com.github.revilated.restaurantvoting.*;
 import com.github.revilated.restaurantvoting.util.validation.*;
 import lombok.*;
 import org.hibernate.annotations.*;
-import org.springframework.util.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -19,7 +17,7 @@ import java.util.*;
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class User extends NamedEntity implements HasIdAndEmail, Serializable {
+public class User extends NamedEntity implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
@@ -37,14 +35,6 @@ public class User extends NamedEntity implements HasIdAndEmail, Serializable {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
-    @Column(name = "enabled", nullable = false, columnDefinition = "bool default true")
-    private boolean enabled = true;
-
-    @Column(name = "registered", nullable = false, columnDefinition = "timestamp default now()", updatable = false)
-    @NotNull
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private Date registered = new Date();
-
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -54,27 +44,6 @@ public class User extends NamedEntity implements HasIdAndEmail, Serializable {
     @JoinColumn(name = "user_id") //https://stackoverflow.com/a/62848296/548473
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Role> roles;
-
-    public User(User u) {
-        this(u.id, u.name, u.email, u.password, u.enabled, u.registered, u.roles);
-    }
-
-    public User(Integer id, String name, String email, String password, Role... roles) {
-        this(id, name, email, password, true, new Date(), Arrays.asList(roles));
-    }
-
-    public User(Integer id, String name, String email, String password, boolean enabled, Date registered, Collection<Role> roles) {
-        super(id, name);
-        this.email = email;
-        this.password = password;
-        this.enabled = enabled;
-        this.registered = registered;
-        setRoles(roles);
-    }
-
-    public void setRoles(Collection<Role> roles) {
-        this.roles = CollectionUtils.isEmpty(roles) ? EnumSet.noneOf(Role.class) : EnumSet.copyOf(roles);
-    }
 
     @Override
     public String toString() {

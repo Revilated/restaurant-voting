@@ -3,8 +3,6 @@ package com.github.revilated.restaurantvoting.util.validation;
 import com.github.revilated.restaurantvoting.*;
 import com.github.revilated.restaurantvoting.error.*;
 import lombok.experimental.*;
-import org.springframework.core.*;
-import org.springframework.lang.*;
 
 @UtilityClass
 public class ValidationUtil {
@@ -34,12 +32,5 @@ public class ValidationUtil {
             throw new IllegalRequestDataException("Entity with id=" + id + " not found");
         }
         return obj;
-    }
-
-    //  https://stackoverflow.com/a/65442410/548473
-    @NonNull
-    public static Throwable getRootCause(@NonNull Throwable t) {
-        Throwable rootCause = NestedExceptionUtils.getRootCause(t);
-        return rootCause != null ? rootCause : t;
     }
 }

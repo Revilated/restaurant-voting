@@ -11,7 +11,7 @@ import static java.lang.annotation.RetentionPolicy.*;
 @Target({METHOD, FIELD})
 @Retention(RUNTIME)
 public @interface NoHtml {
-    String message() default "{error.noHtml}";
+    String message() default "{HTML is not allowed as field value}";
 
     Class<?>[] groups() default {};
 

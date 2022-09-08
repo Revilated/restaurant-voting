@@ -36,7 +36,7 @@ public class AdminRestaurantController {
     @GetMapping("/{id}/with-menu")
     public ResponseEntity<Restaurant> getWithMenu(@PathVariable int id) {
         log.info("getWithMenu {}", id);
-        return ResponseEntity.of(repository.findWithMenu(id));
+        return ResponseEntity.of(repository.findWithDailyMenu(id));
     }
 
     @DeleteMapping("/{id}")

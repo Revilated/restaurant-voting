@@ -61,11 +61,6 @@ public class MatcherFactory {
             return result -> assertMatch(JsonUtil.readValue(getContent(result), clazz), expected);
         }
 
-        @SafeVarargs
-        public final ResultMatcher contentJson(T... expected) {
-            return contentJson(List.of(expected));
-        }
-
         public ResultMatcher contentJson(Iterable<T> expected) {
             return result -> assertMatch(JsonUtil.readValues(getContent(result), clazz), expected);
         }
