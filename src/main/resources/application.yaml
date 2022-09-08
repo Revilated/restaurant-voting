@@ -53,3 +53,6 @@ server.servlet:
     enabled: true # Enable http encoding support
     force: true
   context-path: /restaurantvoting
+
+app:
+  maxVoteTime: "10:59"

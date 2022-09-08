@@ -1,8 +1,8 @@
 package com.github.revilated.restaurantvoting.web.vote;
 
-import com.github.revilated.restaurantvoting.service.*;
 import com.github.revilated.restaurantvoting.web.*;
 import org.junit.jupiter.api.*;
+import org.springframework.beans.factory.annotation.*;
 import org.springframework.boot.test.context.*;
 import org.springframework.context.annotation.*;
 import org.springframework.http.*;
@@ -35,9 +35,9 @@ class VoteControllerOutOfVoteTimeRangeTest extends AbstractControllerTest {
 
         @Bean
         @Primary
-        Clock testClock() {
+        Clock testClock(@Value("${app.maxVoteTime}") LocalTime maxVoteTime) {
             var instant = LocalDate.now()
-                    .atTime(VotingService.MAX_VOTE_TIME)
+                    .atTime(maxVoteTime)
                     .plusMinutes(30)
                     .atZone(ZoneId.systemDefault())
                     .toInstant();
