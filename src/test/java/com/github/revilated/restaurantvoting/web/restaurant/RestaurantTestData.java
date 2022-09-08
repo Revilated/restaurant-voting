@@ -22,8 +22,9 @@ public class RestaurantTestData {
                     });
 
     public static final int RESTAURANT1_ID = 1;
+    public static final int RESTAURANT2_ID = 2;
     public static final Restaurant restaurant1 = new Restaurant(RESTAURANT1_ID, "Макдональдс");
-    public static final Restaurant restaurant2 = new Restaurant(RESTAURANT1_ID + 1, "Бургер Кинг");
+    public static final Restaurant restaurant2 = new Restaurant(RESTAURANT2_ID, "Бургер Кинг");
     public static final Restaurant restaurant3 = new Restaurant(RESTAURANT1_ID + 2, "KFC");
 
     public static final List<Restaurant> restaurants = List.of(restaurant3, restaurant2, restaurant1);

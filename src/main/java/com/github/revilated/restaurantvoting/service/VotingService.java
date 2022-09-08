@@ -19,13 +19,14 @@ import java.time.*;
 @AllArgsConstructor
 public class VotingService {
 
-    private static final LocalTime MAX_VOTE_TIME = LocalTime.of(10, 59);
+    public static final LocalTime MAX_VOTE_TIME = LocalTime.of(10, 59);
 
     private final VoteRepository voteRepository;
+    private final Clock clock;
 
     @Transactional
     public void vote(int userId, int restaurantId) {
-        if (LocalTime.now().isAfter(MAX_VOTE_TIME)) {
+        if (LocalTime.now(clock).isAfter(MAX_VOTE_TIME)) {
             throw new DataConflictException("Too late to vote");
         }
         voteRepository.findByUserPerToday(userId).ifPresentOrElse(

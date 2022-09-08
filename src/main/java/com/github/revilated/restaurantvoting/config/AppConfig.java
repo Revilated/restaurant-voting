@@ -10,6 +10,7 @@ import org.springframework.cache.annotation.*;
 import org.springframework.context.annotation.*;
 
 import java.sql.*;
+import java.time.*;
 
 @Configuration
 @Slf4j
@@ -17,10 +18,16 @@ import java.sql.*;
 // TODO: cache only most requested data!
 public class AppConfig {
 
+    @Profile("!test")
     @Bean(initMethod = "start", destroyMethod = "stop")
     Server h2Server() throws SQLException {
         log.info("Start H2 TCP server");
         return Server.createTcpServer("-tcp", "-tcpAllowOthers", "-tcpPort", "9092");
+    }
+
+    @Bean
+    Clock clock() {
+        return Clock.systemDefaultZone();
     }
 
     @Autowired

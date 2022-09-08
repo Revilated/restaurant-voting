@@ -23,6 +23,7 @@ import org.springframework.context.annotation.*;
                         <p><b>Тестовые креденшелы:</b><br>
                         - user1@yandex.ru / user1<br>
                         - user2@yandex.ru / user2<br>
+                        - user3@yandex.ru / user3<br>
                         - admin@gmail.com / admin<br>
                         """
         ),

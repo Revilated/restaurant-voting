@@ -16,15 +16,15 @@ import org.springframework.web.bind.annotation.*;
 @CacheConfig(cacheNames = "restaurants")
 public class VoteController {
 
-    static final String REST_URL = "/api/profile/restaurants";
+    static final String REST_URL = "/api/profile/restaurants/{id}/vote";
 
     private final VotingService votingService;
 
-    @PostMapping(value = "/{id}/vote")
+    @PostMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @CacheEvict(allEntries = true)
     public void vote(@PathVariable int id, @AuthenticationPrincipal AuthUser user) {
-        log.info("vote for id={}", id);
+        log.info("vote for restaurantId={}", id);
         votingService.vote(user.id(), id);
     }
 }
