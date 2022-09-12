@@ -31,6 +31,8 @@ public class RestaurantTestData {
 
     static {
         restaurant1.setMenu(MenuTestData.restaurant1DailyMenu);
+        restaurant2.setMenu(MenuTestData.restaurant2DailyMenu);
+        restaurant3.setMenu(MenuTestData.restaurant3DailyMenu);
         restaurant1.setVotes(VoteTestData.restaurant1DailyVotes);
         restaurant2.setVotes(VoteTestData.restaurant2DailyVotes);
         restaurant3.setVotes(VoteTestData.restaurant3DailyVotes);

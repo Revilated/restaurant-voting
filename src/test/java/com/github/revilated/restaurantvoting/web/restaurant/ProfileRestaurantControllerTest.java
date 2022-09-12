@@ -18,7 +18,7 @@ class ProfileRestaurantControllerTest extends AbstractControllerTest {
 
     @Test
     @WithUserDetails(USER1_MAIL)
-    void getAllWithVotes() throws Exception {
+    void getAllWithVotesAndMenu() throws Exception {
         perform(MockMvcRequestBuilders.get(REST_URL))
                 .andExpect(status().isOk())
                 .andDo(print())

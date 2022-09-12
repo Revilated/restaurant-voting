@@ -19,7 +19,16 @@ public interface RestaurantRepository extends BaseRepository<Restaurant> {
     @Query("SELECT r FROM Restaurant r WHERE r.id=?1")
     Optional<Restaurant> findWithDailyMenu(int id);
 
-    @EntityGraph(attributePaths = {"votes"}, type = EntityGraph.EntityGraphType.LOAD)
+    @EntityGraph(attributePaths = {"menu"}, type = EntityGraph.EntityGraphType.LOAD)
     @Query("SELECT r FROM Restaurant r ORDER BY r.name ASC")
-    List<Restaurant> findAllWithDailyVotes();
+    List<Restaurant> findAllWithDailyMenu();
+
+    // https://stackoverflow.com/questions/65757777/how-to-fetch-multiple-lists-with-entitygraph
+    @EntityGraph(attributePaths = {"votes"}, type = EntityGraph.EntityGraphType.LOAD)
+    @Query("SELECT r FROM Restaurant r WHERE r in (:restaurants) ORDER BY r.name ASC")
+    List<Restaurant> reloadWithDailyVotes(List<Restaurant> restaurants);
+
+    default List<Restaurant> findAllWithDailyVotesAndMenu() {
+        return reloadWithDailyVotes(findAllWithDailyMenu());
+    }
 }

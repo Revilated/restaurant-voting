@@ -13,7 +13,7 @@ public class VoteTestData {
     public static final Vote vote3 = new Vote(VOTE1_ID + 2, LocalDate.now(), 1, 1);
     public static final Vote vote4 = new Vote(VOTE1_ID + 3, LocalDate.now(), 2, 1);
     public static final Vote vote5 = new Vote(VOTE1_ID + 4, LocalDate.now(), 3, 3);
-    public static final List<Vote> restaurant1DailyVotes = List.of(vote3, vote4);
-    public static final List<Vote> restaurant2DailyVotes = List.of();
-    public static final List<Vote> restaurant3DailyVotes = List.of(vote5);
+    public static final Set<Vote> restaurant1DailyVotes = Set.of(vote3, vote4);
+    public static final Set<Vote> restaurant2DailyVotes = Set.of();
+    public static final Set<Vote> restaurant3DailyVotes = Set.of(vote5);
 }

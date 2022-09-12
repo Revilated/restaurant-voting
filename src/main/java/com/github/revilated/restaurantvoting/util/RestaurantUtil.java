@@ -16,6 +16,8 @@ import java.util.*;
 public class RestaurantUtil {
 
     public static List<RestaurantTo> toTos(List<Restaurant> restaurants) {
-        return restaurants.stream().map(r -> new RestaurantTo(r.getId(), r.getName(), r.getVotes().size())).toList();
+        return restaurants.stream()
+                .map(r -> new RestaurantTo(r.getId(), r.getName(), r.getVotes().size(), r.getMenu()))
+                .toList();
     }
 }

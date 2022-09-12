@@ -24,8 +24,8 @@ public class ProfileRestaurantController {
 
     @GetMapping
     @Cacheable
-    public List<RestaurantTo> getAllWithVotes() {
-        log.info("getAllWithVotes");
-        return RestaurantUtil.toTos(repository.findAllWithDailyVotes());
+    public List<RestaurantTo> getAllWithVotesAndMenu() {
+        log.info("getAllWithVotesAndMenu");
+        return RestaurantUtil.toTos(repository.findAllWithDailyVotesAndMenu());
     }
 }
