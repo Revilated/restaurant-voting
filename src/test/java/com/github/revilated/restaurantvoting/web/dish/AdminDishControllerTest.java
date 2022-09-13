@@ -86,11 +86,10 @@ class AdminDishControllerTest extends AbstractControllerTest {
 
     @Test
     @WithUserDetails(value = ADMIN_MAIL)
-    void deleteNotFound() {
-        assertThrows(Exception.class, () ->
-                perform(MockMvcRequestBuilders.delete(REST_URL + NOT_FOUND, RESTAURANT1_ID))
-                        .andDo(print())
-        );
+    void deleteNotFound() throws Exception {
+        perform(MockMvcRequestBuilders.delete(REST_URL + NOT_FOUND, RESTAURANT1_ID))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());
 
     }
 

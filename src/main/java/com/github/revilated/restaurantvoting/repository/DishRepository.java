@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.*;
 import java.time.*;
 import java.util.*;
 
+import static com.github.revilated.restaurantvoting.util.validation.ValidationUtil.*;
+
 /**
  * @author revilated
  */
@@ -18,6 +20,13 @@ import java.util.*;
 public interface DishRepository extends BaseRepository<Dish> {
 
     Optional<Dish> findByRestaurantIdAndId(int restaurantId, int id);
+
+    @Transactional
+    int deleteByRestaurantIdAndId(int restaurantId, int id);
+
+    default void deleteExisted(int restaurantId, int id) {
+        checkModification(deleteByRestaurantIdAndId(restaurantId, id), id);
+    }
 
     default void checkBelongs(int restaurantId, int id) {
         findByRestaurantIdAndId(restaurantId, id).orElseThrow(

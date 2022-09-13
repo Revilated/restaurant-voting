@@ -6,6 +6,7 @@ import lombok.*;
 import lombok.extern.slf4j.*;
 import org.springframework.cache.annotation.*;
 import org.springframework.http.*;
+import org.springframework.transaction.annotation.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.*;
 
@@ -36,8 +37,7 @@ public class AdminDishController {
     @CacheEvict(allEntries = true)
     public void delete(@PathVariable int restaurantId, @PathVariable int id) {
         log.info("delete {}", id);
-        repository.checkBelongs(restaurantId, id);
-        repository.deleteExisted(id);
+        repository.deleteExisted(restaurantId, id);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -56,6 +56,7 @@ public class AdminDishController {
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @CacheEvict(allEntries = true)
+    @Transactional
     public void update(@Valid @RequestBody Dish dish, @PathVariable int restaurantId, @PathVariable int id) {
         log.info("update {} with id={}", dish, id);
         assureIdConsistent(dish, id);
