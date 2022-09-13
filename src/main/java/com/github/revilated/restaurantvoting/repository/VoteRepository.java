@@ -5,7 +5,6 @@ package com.github.revilated.restaurantvoting.repository;
 
 import com.github.revilated.restaurantvoting.error.*;
 import com.github.revilated.restaurantvoting.model.*;
-import org.springframework.data.jpa.repository.*;
 import org.springframework.transaction.annotation.*;
 
 import java.time.*;
@@ -17,16 +16,12 @@ import java.util.*;
 @Transactional(readOnly = true)
 public interface VoteRepository extends BaseRepository<Vote> {
 
-    @Query("SELECT v FROM Vote v WHERE v.userId = :userId AND v.createdDate >= :startDate AND v.createdDate < :endDate")
-    Optional<Vote> findBetweenDateHalfOpen(int userId, LocalDate startDate, LocalDate endDate);
+    Optional<Vote> findByUserIdAndCreatedDate(int userId, LocalDate createdDate);
 
-    default Optional<Vote> findByUserPerToday(int userId) {
-        var now = LocalDate.now();
-        return findBetweenDateHalfOpen(userId, now, now.plusDays(1));
-    }
+    int countAllByRestaurantIdAndCreatedDate(int restaurantId, LocalDate createdDate);
 
-    default Vote getExistedByUser(int userId) {
-        return findByUserPerToday(userId)
+    default Vote getExistedByUserPerDate(int userId, LocalDate date) {
+        return findByUserIdAndCreatedDate(userId, date)
                 .orElseThrow(() -> new IllegalRequestDataException("Vote not found for userId=" + userId));
     }
 }

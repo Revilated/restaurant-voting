@@ -12,6 +12,7 @@ import org.springframework.web.servlet.support.*;
 
 import javax.validation.*;
 import java.net.*;
+import java.time.*;
 import java.util.*;
 
 import static com.github.revilated.restaurantvoting.util.validation.ValidationUtil.*;
@@ -36,7 +37,7 @@ public class AdminRestaurantController {
     @GetMapping("/{id}/with-menu")
     public ResponseEntity<Restaurant> getWithMenu(@PathVariable int id) {
         log.info("getWithMenu {}", id);
-        return ResponseEntity.of(repository.findWithDailyMenu(id));
+        return ResponseEntity.of(repository.findWithMenuByDate(id, LocalDate.now()));
     }
 
     @DeleteMapping("/{id}")

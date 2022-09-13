@@ -15,6 +15,10 @@ import java.util.*;
 @UtilityClass
 public class RestaurantUtil {
 
+    public static RestaurantTo toTo(Restaurant restaurant, int votes) {
+        return new RestaurantTo(restaurant.getId(), restaurant.getName(), votes, restaurant.getMenu());
+    }
+
     public static List<RestaurantTo> toTos(List<Restaurant> restaurants) {
         return restaurants.stream()
                 .map(r -> new RestaurantTo(r.getId(), r.getName(), r.getVotes().size(), r.getMenu()))

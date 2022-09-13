@@ -9,6 +9,7 @@ import org.springframework.cache.annotation.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.*;
 import java.util.*;
 
 @RestController
@@ -20,12 +21,20 @@ public class RestaurantController {
 
     static final String REST_URL = "/api/restaurants";
 
-    private final RestaurantRepository repository;
+    private final RestaurantRepository restaurantRepository;
+    private final VoteRepository voteRepository;
 
     @GetMapping
     @Cacheable
-    public List<RestaurantTo> getAllWithVotesAndMenu() {
-        log.info("getAllWithVotesAndMenu");
-        return RestaurantUtil.toTos(repository.findAllWithDailyVotesAndMenu());
+    public List<RestaurantTo> getAllWithDailyVotesAndMenu() {
+        log.info("getAllWithDailyVotesAndMenu");
+        var date = LocalDate.now();
+        return restaurantRepository.findAllWithMenuByDate(date).stream()
+                .map(r -> {
+                    int id = Objects.requireNonNull(r.getId(), "Restaurant id must not be null");
+                    var votes = voteRepository.countAllByRestaurantIdAndCreatedDate(id, date);
+                    return RestaurantUtil.toTo(r, votes);
+                })
+                .toList();
     }
 }

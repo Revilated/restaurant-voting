@@ -39,7 +39,7 @@ public class VotingService {
         if (LocalTime.now(clock).isAfter(maxVoteTime)) {
             throw new DataConflictException("Too late to vote");
         }
-        var vote = voteRepository.getExistedByUser(userId);
+        var vote = voteRepository.getExistedByUserPerDate(userId, LocalDate.now());
         vote.setRestaurantId(restaurantId);
         voteRepository.save(vote);
     }

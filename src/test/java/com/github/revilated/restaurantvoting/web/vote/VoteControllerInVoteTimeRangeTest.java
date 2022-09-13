@@ -30,7 +30,7 @@ class VoteControllerInVoteTimeRangeTest extends AbstractControllerTest {
         perform(MockMvcRequestBuilders.post(REST_URL, RESTAURANT1_ID)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
-        var vote = voteRepository.findByUserPerToday(NO_VOTES_USER_ID);
+        var vote = voteRepository.findByUserIdAndCreatedDate(NO_VOTES_USER_ID, LocalDate.now());
         assertTrue(vote.isPresent());
         assertEquals(RESTAURANT1_ID, vote.get().getRestaurantId());
     }
@@ -41,7 +41,7 @@ class VoteControllerInVoteTimeRangeTest extends AbstractControllerTest {
         perform(MockMvcRequestBuilders.put(REST_URL, RESTAURANT2_ID)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
-        var vote = voteRepository.findByUserPerToday(USER1_ID);
+        var vote = voteRepository.findByUserIdAndCreatedDate(USER1_ID, LocalDate.now());
         assertTrue(vote.isPresent());
         assertEquals(RESTAURANT2_ID, vote.get().getRestaurantId());
     }
