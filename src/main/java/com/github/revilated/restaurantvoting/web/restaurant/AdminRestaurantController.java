@@ -21,7 +21,7 @@ import static com.github.revilated.restaurantvoting.util.validation.ValidationUt
 @RequestMapping(value = AdminRestaurantController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 @Slf4j
 @AllArgsConstructor
-@CacheConfig(cacheNames = "restaurants")
+@CacheConfig(cacheNames = {"admin-restaurants", "restaurants"})
 public class AdminRestaurantController {
 
     static final String REST_URL = "/api/admin/restaurants";
@@ -49,7 +49,7 @@ public class AdminRestaurantController {
     }
 
     @GetMapping
-    @Cacheable
+    @Cacheable("admin-restaurants")
     public List<Restaurant> getAll() {
         log.info("getAll");
         return repository.findAll(Sort.by(Sort.Direction.ASC, "name"));

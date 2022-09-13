@@ -19,7 +19,7 @@ import static com.github.revilated.restaurantvoting.util.validation.ValidationUt
 @RequestMapping(value = AdminDishController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 @Slf4j
 @AllArgsConstructor
-@CacheConfig(cacheNames = "menu")
+@CacheConfig(cacheNames = {"menu", "restaurants"})
 public class AdminDishController {
 
     static final String REST_URL = "/api/admin/restaurants/{restaurantId}/dishes";
