@@ -5,7 +5,6 @@ import com.github.revilated.restaurantvoting.web.*;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.boot.test.context.*;
-import org.springframework.context.annotation.*;
 import org.springframework.http.*;
 import org.springframework.security.test.context.support.*;
 import org.springframework.test.web.servlet.request.*;
@@ -57,17 +56,11 @@ class VoteControllerInVoteTimeRangeTest extends AbstractControllerTest {
     }
 
     @TestConfiguration
-    public static class Config {
+    public static class Config extends AbstractTestVotingServiceConfig {
 
-        @Bean
-        @Primary
-        Clock testClock(@Value("${app.maxVoteTime}") LocalTime maxVoteTime) {
-            var instant = LocalDate.now()
-                    .atTime(maxVoteTime)
-                    .minusMinutes(30)
-                    .atZone(ZoneId.systemDefault())
-                    .toInstant();
-            return Clock.fixed(instant, ZoneId.systemDefault());
+        @Override
+        protected Duration maxVoteTimeDiff() {
+            return Duration.ofMinutes(-30);
         }
     }
 }
