@@ -1,4 +1,4 @@
-package com.github.revilated.restaurantvoting.web.menu;
+package com.github.revilated.restaurantvoting.web.dish;
 
 import com.github.revilated.restaurantvoting.web.*;
 import org.junit.jupiter.api.*;
@@ -7,7 +7,7 @@ import org.springframework.security.test.context.support.*;
 import org.springframework.test.web.servlet.request.*;
 
 import static com.github.revilated.restaurantvoting.web.UserTestData.*;
-import static com.github.revilated.restaurantvoting.web.menu.MenuTestData.*;
+import static com.github.revilated.restaurantvoting.web.dish.DishTestData.*;
 import static com.github.revilated.restaurantvoting.web.restaurant.RestaurantTestData.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;

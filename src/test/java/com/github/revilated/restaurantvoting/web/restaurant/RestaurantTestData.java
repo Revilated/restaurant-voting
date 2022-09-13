@@ -3,7 +3,7 @@ package com.github.revilated.restaurantvoting.web.restaurant;
 import com.github.revilated.restaurantvoting.model.*;
 import com.github.revilated.restaurantvoting.to.*;
 import com.github.revilated.restaurantvoting.web.*;
-import com.github.revilated.restaurantvoting.web.menu.*;
+import com.github.revilated.restaurantvoting.web.dish.*;
 import com.github.revilated.restaurantvoting.web.vote.*;
 
 import java.util.*;
@@ -30,9 +30,9 @@ public class RestaurantTestData {
     public static final List<Restaurant> restaurants = List.of(restaurant3, restaurant2, restaurant1);
 
     static {
-        restaurant1.setMenu(MenuTestData.restaurant1DailyMenu);
-        restaurant2.setMenu(MenuTestData.restaurant2DailyMenu);
-        restaurant3.setMenu(MenuTestData.restaurant3DailyMenu);
+        restaurant1.setMenu(DishTestData.restaurant1DailyMenu);
+        restaurant2.setMenu(DishTestData.restaurant2DailyMenu);
+        restaurant3.setMenu(DishTestData.restaurant3DailyMenu);
         restaurant1.setVotes(VoteTestData.restaurant1DailyVotes);
         restaurant2.setVotes(VoteTestData.restaurant2DailyVotes);
         restaurant3.setVotes(VoteTestData.restaurant3DailyVotes);

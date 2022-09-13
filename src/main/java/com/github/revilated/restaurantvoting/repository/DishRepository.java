@@ -15,7 +15,7 @@ import java.util.*;
  * @author revilated
  */
 @Transactional(readOnly = true)
-public interface MenuRepository extends BaseRepository<Dish> {
+public interface DishRepository extends BaseRepository<Dish> {
 
     Optional<Dish> findByRestaurantIdAndId(int restaurantId, int id);
 
@@ -26,5 +26,5 @@ public interface MenuRepository extends BaseRepository<Dish> {
     }
 
     @Query("SELECT d FROM Dish d WHERE d.restaurantId = :restaurantId AND d.createdDate = :date ORDER BY d.name")
-    List<Dish> findAllPerDate(int restaurantId, LocalDate date);
+    List<Dish> findMenu(int restaurantId, LocalDate date);
 }

@@ -1,4 +1,4 @@
-package com.github.revilated.restaurantvoting.web.menu;
+package com.github.revilated.restaurantvoting.web.dish;
 
 import com.github.revilated.restaurantvoting.model.*;
 import com.github.revilated.restaurantvoting.repository.*;
@@ -15,15 +15,15 @@ import java.net.*;
 import static com.github.revilated.restaurantvoting.util.validation.ValidationUtil.*;
 
 @RestController
-@RequestMapping(value = AdminMenuController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = AdminDishController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 @Slf4j
 @AllArgsConstructor
 @CacheConfig(cacheNames = "menu")
-public class AdminMenuController {
+public class AdminDishController {
 
-    static final String REST_URL = "/api/admin/restaurants/{restaurantId}/menu";
+    static final String REST_URL = "/api/admin/restaurants/{restaurantId}/dishes";
 
-    private final MenuRepository repository;
+    private final DishRepository repository;
 
     @GetMapping("/{id}")
     public ResponseEntity<Dish> get(@PathVariable int restaurantId, @PathVariable int id) {

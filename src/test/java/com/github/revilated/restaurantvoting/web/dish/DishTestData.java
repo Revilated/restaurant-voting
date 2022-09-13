@@ -1,4 +1,4 @@
-package com.github.revilated.restaurantvoting.web.menu;
+package com.github.revilated.restaurantvoting.web.dish;
 
 import com.github.revilated.restaurantvoting.model.*;
 import com.github.revilated.restaurantvoting.web.*;
@@ -6,7 +6,7 @@ import com.github.revilated.restaurantvoting.web.*;
 import java.time.*;
 import java.util.*;
 
-public class MenuTestData {
+public class DishTestData {
     public static final MatcherFactory.Matcher<Dish> DISH_MATCHER = MatcherFactory
             .usingIgnoringFieldsComparator(Dish.class, "restaurantId", "createdDate");
 

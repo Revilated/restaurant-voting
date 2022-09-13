@@ -1,4 +1,4 @@
-package com.github.revilated.restaurantvoting.web.menu;
+package com.github.revilated.restaurantvoting.web.dish;
 
 import com.github.revilated.restaurantvoting.model.*;
 import com.github.revilated.restaurantvoting.repository.*;
@@ -20,12 +20,12 @@ public class MenuController {
 
     static final String REST_URL = "/api/restaurants/{restaurantId}/menu";
 
-    private final MenuRepository repository;
+    private final DishRepository repository;
 
     @GetMapping
     @Cacheable
-    public List<Dish> getAllPerDay(@PathVariable int restaurantId) {
+    public List<Dish> getPerToday(@PathVariable int restaurantId) {
         log.info("getAllPerDay");
-        return repository.findAllPerDate(restaurantId, LocalDate.now());
+        return repository.findMenu(restaurantId, LocalDate.now());
     }
 }

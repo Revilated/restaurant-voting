@@ -1,4 +1,4 @@
-package com.github.revilated.restaurantvoting.web.menu;
+package com.github.revilated.restaurantvoting.web.dish;
 
 import com.github.revilated.restaurantvoting.model.*;
 import com.github.revilated.restaurantvoting.repository.*;
@@ -13,21 +13,21 @@ import org.springframework.transaction.annotation.*;
 
 import static com.github.revilated.restaurantvoting.util.JsonUtil.*;
 import static com.github.revilated.restaurantvoting.web.UserTestData.*;
-import static com.github.revilated.restaurantvoting.web.menu.MenuTestData.NOT_FOUND;
-import static com.github.revilated.restaurantvoting.web.menu.MenuTestData.getNew;
-import static com.github.revilated.restaurantvoting.web.menu.MenuTestData.getUpdated;
-import static com.github.revilated.restaurantvoting.web.menu.MenuTestData.*;
+import static com.github.revilated.restaurantvoting.web.dish.DishTestData.NOT_FOUND;
+import static com.github.revilated.restaurantvoting.web.dish.DishTestData.getNew;
+import static com.github.revilated.restaurantvoting.web.dish.DishTestData.getUpdated;
+import static com.github.revilated.restaurantvoting.web.dish.DishTestData.*;
 import static com.github.revilated.restaurantvoting.web.restaurant.RestaurantTestData.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-class AdminMenuControllerTest extends AbstractControllerTest {
+class AdminDishControllerTest extends AbstractControllerTest {
 
-    private static final String REST_URL = AdminMenuController.REST_URL + '/';
+    private static final String REST_URL = AdminDishController.REST_URL + '/';
 
     @Autowired
-    private MenuRepository menuRepository;
+    private DishRepository dishRepository;
 
     @Test
     @WithUserDetails(ADMIN_MAIL)
@@ -45,7 +45,7 @@ class AdminMenuControllerTest extends AbstractControllerTest {
         perform(MockMvcRequestBuilders.delete(REST_URL + DISH1_ID, RESTAURANT1_ID))
                 .andDo(print())
                 .andExpect(status().isNoContent());
-        assertFalse(menuRepository.findByRestaurantIdAndId(RESTAURANT1_ID, DISH1_ID).isPresent());
+        assertFalse(dishRepository.findByRestaurantIdAndId(RESTAURANT1_ID, DISH1_ID).isPresent());
     }
 
     @Test
@@ -60,7 +60,7 @@ class AdminMenuControllerTest extends AbstractControllerTest {
         int newId = created.id();
         newDish.setId(newId);
         DISH_MATCHER.assertMatch(created, newDish);
-        DISH_MATCHER.assertMatch(menuRepository.getExisted(newId), newDish);
+        DISH_MATCHER.assertMatch(dishRepository.getExisted(newId), newDish);
     }
 
     @Test
@@ -73,7 +73,7 @@ class AdminMenuControllerTest extends AbstractControllerTest {
                 .content(writeValue(updated)))
                 .andDo(print())
                 .andExpect(status().isNoContent());
-        DISH_MATCHER.assertMatch(menuRepository.getExisted(DISH1_ID), getUpdated());
+        DISH_MATCHER.assertMatch(dishRepository.getExisted(DISH1_ID), getUpdated());
     }
 
     @Test
