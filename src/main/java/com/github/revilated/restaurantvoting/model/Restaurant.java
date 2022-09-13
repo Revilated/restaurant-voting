@@ -27,14 +27,14 @@ public class Restaurant extends NamedEntity {
 
     @OneToMany(fetch = FetchType.LAZY)//, cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name = "restaurant_id", updatable = false)
-    @Where(clause = "created = current_date()")
+    @Where(clause = "created_date = current_date()")
     @OnDelete(action = OnDeleteAction.CASCADE) //https://stackoverflow.com/a/44988100/548473
     @Schema(hidden = true)
     private Set<Vote> votes;
 
     @OneToMany(fetch = FetchType.LAZY)//, mappedBy = "restaurant")//, cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name = "restaurant_id", updatable = false)
-    @Where(clause = "created = current_date()")
+    @Where(clause = "created_date = current_date()")
     @OnDelete(action = OnDeleteAction.CASCADE) //https://stackoverflow.com/a/44988100/548473
     @Schema(hidden = true)
     private List<Dish> menu;

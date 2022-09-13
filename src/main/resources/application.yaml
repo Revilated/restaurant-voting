@@ -55,4 +55,4 @@ server.servlet:
   context-path: /restaurantvoting
 
 app:
-  maxVoteTime: "10:59"
+  maxVoteTime: "11:00"

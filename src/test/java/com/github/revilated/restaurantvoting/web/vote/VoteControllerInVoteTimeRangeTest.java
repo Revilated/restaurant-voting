@@ -26,7 +26,7 @@ class VoteControllerInVoteTimeRangeTest extends AbstractControllerTest {
 
     @Test
     @WithUserDetails(NO_VOTES_USER_MAIL)
-    void newVote() throws Exception {
+    void vote() throws Exception {
         perform(MockMvcRequestBuilders.post(REST_URL, RESTAURANT1_ID)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
@@ -38,7 +38,7 @@ class VoteControllerInVoteTimeRangeTest extends AbstractControllerTest {
     @Test
     @WithUserDetails(USER1_MAIL)
     void changeVote() throws Exception {
-        perform(MockMvcRequestBuilders.post(REST_URL, RESTAURANT2_ID)
+        perform(MockMvcRequestBuilders.put(REST_URL, RESTAURANT2_ID)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
         var vote = voteRepository.findByUserPerToday(USER1_ID);
@@ -48,13 +48,12 @@ class VoteControllerInVoteTimeRangeTest extends AbstractControllerTest {
 
     @Test
     @WithUserDetails(USER1_MAIL)
-    void sameVote() throws Exception {
-        perform(MockMvcRequestBuilders.post(REST_URL, RESTAURANT1_ID)
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNoContent());
-        var vote = voteRepository.findByUserPerToday(USER1_ID);
-        assertTrue(vote.isPresent());
-        assertEquals(RESTAURANT1_ID, vote.get().getRestaurantId());
+    void sameVote() {
+        assertThrows(Exception.class, () ->
+                perform(MockMvcRequestBuilders.post(REST_URL, RESTAURANT1_ID)
+                        .contentType(MediaType.APPLICATION_JSON))
+                        .andExpect(status().isNoContent())
+        );
     }
 
     @TestConfiguration

@@ -3,6 +3,7 @@
  */
 package com.github.revilated.restaurantvoting.repository;
 
+import com.github.revilated.restaurantvoting.error.*;
 import com.github.revilated.restaurantvoting.model.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.transaction.annotation.*;
@@ -22,5 +23,10 @@ public interface VoteRepository extends BaseRepository<Vote> {
     default Optional<Vote> findByUserPerToday(int userId) {
         var now = LocalDate.now();
         return findBetweenDateHalfOpen(userId, now, now.plusDays(1));
+    }
+
+    default Vote getExistedByUser(int userId) {
+        return findByUserPerToday(userId)
+                .orElseThrow(() -> new IllegalRequestDataException("Vote not found for userId=" + userId));
     }
 }

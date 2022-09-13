@@ -16,8 +16,8 @@ import java.time.*;
 @Entity
 @Table(name = "vote", uniqueConstraints = {
         @UniqueConstraint(
-                columnNames = {"user_id", "restaurant_id", "created"},
-                name = "vote_unique_user_restaurant_date_idx"
+                columnNames = {"user_id", "created_date"},
+                name = "vote_unique_user_date_idx"
         )
 })
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -25,10 +25,14 @@ import java.time.*;
 @Getter
 public class Vote extends BaseEntity {
 
-    @Column(name = "created", nullable = false, columnDefinition = "date default now()", updatable = false)
+    @Column(name = "created_date", nullable = false, columnDefinition = "date default now()", updatable = false)
     @NotNull
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private LocalDate createdDate = LocalDate.now();
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    private User user;
 
     @Column(name = "user_id", nullable = false, updatable = false)
     private Integer userId;

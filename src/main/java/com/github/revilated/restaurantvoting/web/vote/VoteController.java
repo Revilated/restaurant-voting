@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @CacheConfig(cacheNames = "restaurants")
 public class VoteController {
 
-    static final String REST_URL = "/api/profile/restaurants/{id}/vote";
+    static final String REST_URL = "/api/profile/restaurants/{id}/votes";
 
     private final VotingService votingService;
 
@@ -26,5 +26,13 @@ public class VoteController {
     public void vote(@PathVariable int id, @AuthenticationPrincipal AuthUser user) {
         log.info("vote for restaurantId={}", id);
         votingService.vote(user.id(), id);
+    }
+
+    @PutMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @CacheEvict(allEntries = true)
+    public void changeVote(@PathVariable int id, @AuthenticationPrincipal AuthUser user) {
+        log.info("change vote to restaurantId={}", id);
+        votingService.changeVote(user.id(), id);
     }
 }

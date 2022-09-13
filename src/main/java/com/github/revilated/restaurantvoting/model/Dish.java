@@ -18,7 +18,7 @@ import java.time.*;
 @Table(
         name = "dish",
         uniqueConstraints = {@UniqueConstraint(
-                columnNames = {"restaurant_id", "name", "created"},
+                columnNames = {"restaurant_id", "name", "created_date"},
                 name = "dish_unique_restaurant_name_created_idx")
         }
 )
@@ -31,7 +31,7 @@ public class Dish extends NamedEntity {
     @Range(min = 0)
     private Long price;
 
-    @Column(name = "created", nullable = false, columnDefinition = "date default now()", updatable = false)
+    @Column(name = "created_date", nullable = false, columnDefinition = "date default now()", updatable = false)
     @NotNull
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private LocalDate createdDate = LocalDate.now();

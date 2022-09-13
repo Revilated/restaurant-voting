@@ -16,7 +16,7 @@ VALUES ('Макдональдс'),
        ('Бургер Кинг'),
        ('KFC');
 
-INSERT INTO DISH (NAME, PRICE, RESTAURANT_ID, CREATED)
+INSERT INTO DISH (NAME, PRICE, RESTAURANT_ID, CREATED_DATE)
 VALUES ('Двойной чизбургер', 15000, 1, '2022-08-31'),
        ('Нагетсы', 13000, 1, '2022-08-31'),
        ('Чай', 4000, 1, '2022-08-31');
@@ -32,11 +32,11 @@ VALUES ('Биг тейсти', 20000, 1),
        ('Картофель по-деревенски', 7000, 3),
        ('Спрайт', 6000, 3);
 
-INSERT INTO VOTE (USER_ID, RESTAURANT_ID, CREATED)
+INSERT INTO VOTE (USER_ID, RESTAURANT_ID, CREATED_DATE)
 VALUES (1, 1, '2022-08-31'),
        (2, 2, '2022-08-31');
 
 INSERT INTO VOTE (USER_ID, RESTAURANT_ID)
 VALUES (1, 1),
        (2, 1),
-       (3, 3);
+       (4, 3);

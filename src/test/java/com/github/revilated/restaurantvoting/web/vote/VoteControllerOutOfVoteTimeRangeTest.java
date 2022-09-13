@@ -21,10 +21,20 @@ class VoteControllerOutOfVoteTimeRangeTest extends AbstractControllerTest {
     private static final String REST_URL = VoteController.REST_URL;
 
     @Test
+    @WithUserDetails(NO_VOTES_USER_MAIL)
+    void vote() {
+        assertDoesNotThrow(() ->
+                perform(MockMvcRequestBuilders.post(REST_URL, RESTAURANT1_ID)
+                        .contentType(MediaType.APPLICATION_JSON))
+                        .andExpect(status().isNoContent())
+        );
+    }
+
+    @Test
     @WithUserDetails(USER1_MAIL)
-    void voteOutOfTime() {
+    void changeVote() {
         assertThrows(Exception.class, () ->
-                perform(MockMvcRequestBuilders.post(REST_URL, RESTAURANT2_ID)
+                perform(MockMvcRequestBuilders.put(REST_URL, RESTAURANT2_ID)
                         .contentType(MediaType.APPLICATION_JSON))
                         .andExpect(status().isNoContent())
         );

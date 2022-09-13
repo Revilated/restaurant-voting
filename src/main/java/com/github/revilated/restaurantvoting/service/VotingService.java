@@ -30,14 +30,17 @@ public class VotingService {
 
     @Transactional
     public void vote(int userId, int restaurantId) {
+        var newVote = new Vote(userId, restaurantId);
+        voteRepository.save(newVote);
+    }
+
+    @Transactional
+    public void changeVote(int userId, int restaurantId) {
         if (LocalTime.now(clock).isAfter(maxVoteTime)) {
             throw new DataConflictException("Too late to vote");
         }
-        voteRepository.findByUserPerToday(userId).ifPresentOrElse(
-                v -> v.setRestaurantId(restaurantId),
-                () -> {
-                    var newVote = new Vote(userId, restaurantId);
-                    voteRepository.save(newVote);
-                });
+        var vote = voteRepository.getExistedByUser(userId);
+        vote.setRestaurantId(restaurantId);
+        voteRepository.save(vote);
     }
 }

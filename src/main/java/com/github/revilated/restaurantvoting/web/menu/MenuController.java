@@ -12,13 +12,13 @@ import java.time.*;
 import java.util.*;
 
 @RestController
-@RequestMapping(value = ProfileMenuController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = MenuController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 @Slf4j
 @AllArgsConstructor
 @CacheConfig(cacheNames = "menu")
-public class ProfileMenuController {
+public class MenuController {
 
-    static final String REST_URL = "/api/profile/restaurants/{restaurantId}/menu";
+    static final String REST_URL = "/api/restaurants/{restaurantId}/menu";
 
     private final MenuRepository repository;
 
