@@ -6,7 +6,6 @@ import com.github.revilated.restaurantvoting.util.*;
 import lombok.extern.slf4j.*;
 import org.h2.tools.*;
 import org.springframework.beans.factory.annotation.*;
-import org.springframework.cache.annotation.*;
 import org.springframework.context.annotation.*;
 
 import java.sql.*;
@@ -14,7 +13,6 @@ import java.time.*;
 
 @Configuration
 @Slf4j
-@EnableCaching
 public class AppConfig {
 
     @Profile("!test")
@@ -29,7 +27,7 @@ public class AppConfig {
         return Clock.systemDefaultZone();
     }
 
-    @Autowired
+    @Autowired(required = false)
     void configureAndStoreObjectMapper(ObjectMapper objectMapper) {
         objectMapper.registerModule(new Hibernate5Module());
         JsonUtil.setMapper(objectMapper);
