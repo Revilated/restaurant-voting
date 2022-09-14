@@ -1,7 +1,6 @@
 package com.github.revilated.restaurantvoting.web.vote;
 
 import com.github.revilated.restaurantvoting.repository.*;
-import com.github.revilated.restaurantvoting.web.*;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.boot.test.context.*;
@@ -16,9 +15,7 @@ import static com.github.revilated.restaurantvoting.web.restaurant.RestaurantTes
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-class VoteControllerInVoteTimeRangeTest extends AbstractControllerTest {
-
-    private static final String REST_URL = VoteController.REST_URL;
+class VoteControllerInVoteTimeRangeTest extends AbstractVoteControllerTest {
 
     @Autowired
     private VoteRepository voteRepository;
@@ -26,7 +23,7 @@ class VoteControllerInVoteTimeRangeTest extends AbstractControllerTest {
     @Test
     @WithUserDetails(NO_VOTES_USER_MAIL)
     void vote() throws Exception {
-        perform(MockMvcRequestBuilders.post(REST_URL, RESTAURANT1_ID)
+        perform(MockMvcRequestBuilders.post(REST_URL + "?restaurantId=" + RESTAURANT1_ID)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
         var vote = voteRepository.findByUserIdAndCreatedDate(NO_VOTES_USER_ID, LocalDate.now());
@@ -37,7 +34,7 @@ class VoteControllerInVoteTimeRangeTest extends AbstractControllerTest {
     @Test
     @WithUserDetails(USER1_MAIL)
     void changeVote() throws Exception {
-        perform(MockMvcRequestBuilders.put(REST_URL, RESTAURANT2_ID)
+        perform(MockMvcRequestBuilders.put(REST_URL + "?restaurantId=" + RESTAURANT2_ID)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
         var vote = voteRepository.findByUserIdAndCreatedDate(USER1_ID, LocalDate.now());
@@ -49,7 +46,7 @@ class VoteControllerInVoteTimeRangeTest extends AbstractControllerTest {
     @WithUserDetails(USER1_MAIL)
     void sameVote() {
         assertThrows(Exception.class, () ->
-                perform(MockMvcRequestBuilders.post(REST_URL, RESTAURANT1_ID)
+                perform(MockMvcRequestBuilders.post(REST_URL + "?restaurantId=" + RESTAURANT1_ID)
                         .contentType(MediaType.APPLICATION_JSON))
                         .andExpect(status().isNoContent())
         );

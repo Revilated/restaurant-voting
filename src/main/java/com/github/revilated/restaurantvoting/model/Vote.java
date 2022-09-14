@@ -32,9 +32,11 @@ public class Vote extends BaseEntity {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    @JsonIgnore
     private User user;
 
     @Column(name = "user_id", nullable = false, updatable = false)
+    @JsonIgnore
     private Integer userId;
 
     @Column(name = "restaurant_id", nullable = false)

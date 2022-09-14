@@ -11,6 +11,7 @@ import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.*;
 
 import java.time.*;
+import java.util.*;
 
 /**
  * @author revilated
@@ -42,5 +43,9 @@ public class VotingService {
         var vote = voteRepository.getExistedByUserPerDate(userId, LocalDate.now());
         vote.setRestaurantId(restaurantId);
         voteRepository.save(vote);
+    }
+
+    public Optional<Vote> get(int userId) {
+        return voteRepository.findByUserIdAndCreatedDate(userId, LocalDate.now());
     }
 }
